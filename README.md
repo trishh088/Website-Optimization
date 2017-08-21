@@ -1,55 +1,107 @@
-## Website Performance Optimization portfolio project
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
-
-To get started, check out the repository and inspect the code.
-
-### Getting started
-
-#### Part 1: Optimize PageSpeed Insights score for index.html
-
-Some useful tips to help you get started:
-
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
-
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
-
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
-
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ./ngrok http 8080
-  ```
-
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
-
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
 
 #### Part 2: Optimize Frames per Second in pizza.html
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
+the dx in the code was unnecessary and was slowing down the resize animation so
 
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
+```// Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
+function determineDx (elem, size) {
+ var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
+//moved old width down to avoid
+ var oldWidth = elem.offsetWidth;
+ var oldSize = oldWidth / windowWidth;
 
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
+ // Changes the slider value to a percent width
+ function sizeSwitcher (size) {
+   switch(size) {
+     case "1":
+       return 0.25;
+     case "2":
+       return 0.3333;
+     case "3":
+       return 0.5;
+     default:
+       console.log("bug in sizeSwitcher");
+   }
+ }
 
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
+ var newSize = sizeSwitcher(size);
+ var dx = (newSize - oldSize) * windowWidth;
 
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+ return dx;
+}
+
+// Iterates through pizza elements on the page and changes their widths
+function changePizzaSizes(size) {
+ var randomPizza = document.querySelectorAll(".randomPizzaContainer");
+ for (var i = 0; i < randomPizza.length; i++) {
+   var dx = determineDx(randomPizza[i], size);
+   var newwidth = (randomPizza[i].offsetWidth + dx) + 'px';
+   randomPizza[i].style.width = newwidth;
+ }
+}
+
+changePizzaSizes(size); ```
+
+
+
+
+was changed to
+
+``` function changePizzaSizes(size) {
+  switch(size) {
+    case "1":
+    newwidth = 25;
+    break;
+
+    case "2":
+    newwidth = 33.3;
+    break;
+
+    case "3":
+    newwidth = 50;
+    break;
+
+    default:
+    console.log("bug in sizeSwitcher");
+  }
+  var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+
+  for(i = 0; i < randomPizzas.length; i++){
+    randomPizzas[i].style.width = newwidth + "%";
+  }
+}
+changePizzaSizes(size); ```
+
+
+****next to change   Time to generate pizzas on load: 23.09499999999999ms to 11.669999999999987ms  
+``  window.performance.mark("mark_end_resize");
+  window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
+  var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
+  console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
+`` on line 491 to
+``  var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
+  console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
+  //moved these two lines to stop Forced synchronous Layout
+  window.performance.mark("mark_end_resize");
+  window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
+``
+
+Also this was changed
+
+``function updatePositions() {
+
+//moved frame++ and window.performance below to stop Forced Synchronous Layout
+  var items = document.querySelectorAll('.mover');
+
+  for (var i = 0; i < items.length; i++) {
+    var phase = Math.sin((document.body.scrollTop / 1000) + (i % 2));
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    window.performance.mark("mark_start_frame");
+    frame++;
+  }
+``
+ and
+
+`` // To improve scrolling the for loop limit was changed from 200 to 100
+ for (var i = 0; i < 100; i++)`` on .ne 566 of main.js ``
