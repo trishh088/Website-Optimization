@@ -1,10 +1,11 @@
+# Website Performance Optimization portfolio project 
 For link to the website for review link [here](https://trishh088.github.io/trishh088.github.io-website-optimise/)
 For link to the code click [here](https://github.com/trishh088/trishh088.github.io-website-optimise.git)
 
-##Part 1: Optimizing index.html
+## Part 1: Optimizing index.html
 The specs are as follows
 1. PageSpeed Insights for Mobile : **93/100**
-2. PageSpeed Insights for desktop = **93/100**
+2. PageSpeed Insights for desktop = **92/100**
 
 * The photos were minimized using Grunt with the
   * Pizzeria.jpg at quality 20 and width 400
