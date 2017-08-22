@@ -74,20 +74,7 @@ was changed to
 changePizzaSizes(size); ```
 
 
-****next to change   Time to generate pizzas on load: 23.09499999999999ms to 11.669999999999987ms  
-``  window.performance.mark("mark_end_resize");
-  window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
-  var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
-  console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
-`` on line 491 to
-``  var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
-  console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
-  //moved these two lines to stop Forced synchronous Layout
-  window.performance.mark("mark_end_resize");
-  window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
-``
-
-Also this was changed
+*Also this was changed
 
 ``function updatePositions() {
 

@@ -1,6 +1,7 @@
 /** {
   outline: 1px solid red !important;
 }*/
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -10,7 +11,10 @@
 body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   background: black;
+
 }
+
+
 
 input {
   background: grey;

@@ -487,11 +487,12 @@ function changePizzaSizes(size) {
 changePizzaSizes(size);
 
   // User Timing API is awesome
-  var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
-  console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
-  //moved these two lines to stop Forced synchronous Layout
+
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
+  var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
+
+  console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
 
 
 }
@@ -530,19 +531,25 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 
 function updatePositions() {
-
-//moved frame++ and window.performance below to stop Forced Synchronous Layout
-
-  var items = document.querySelectorAll('.mover');
-
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
-  window.performance.mark("mark_start_frame");
   frame++;
+  window.performance.mark("mark_start_frame");
 
+  //  var items = document.querySelectorAll('.mover');
+  //addedthis
+  var topSection = (document.body.scrollTop / 1250);
+  var itemLength = items.length;
+  itemsArray = [0,256,512,768,1024,1280,1536,1792];
 
+  for (var i = 0; i < itemLength ; i++) {
+    var phase = Math.sin( topSection + (i % 5));
+    var style = 600 * phase + 'px';
+    // items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    // items[i].style.transform = 'matrix(0px,256px,512px,768px,1024px,1280px,1536px,1792px)' + 100 * phase + 'px';
+    // items[i].style.transform = 'translateX( "+ itemsArray[i] +" px )' + 100 * phase + 'px';
+    // items[i].style.left = itemsArray[i] + 100 * phase + 'px';
+    items[i].style.transform = "translateX(" + style; +"10px)";
+
+  }
 
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -563,15 +570,18 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   // To improve scrolling the for loop limit was changed from 200 to 100
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 105; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
+    elem.basicLeft = (i % cols) * s ;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
+
+ items = document.querySelectorAll('.mover');
   updatePositions();
+
 });
