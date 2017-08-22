@@ -51,11 +51,12 @@ the dx in the code was unnecessary and was slowing down the resize animation so
     randomPizzas[i].style.width = newwidth + "%";
   }
 }
-changePizzaSizes(size);  ```
+changePizzaSizes(size);
+```
 
 Below code is changed with the comment at each snippet code that's different then the original repository
 
-``` JavaScript
+```  JavaScript
  function updatePositions() {
 
 //moved frame++ and window.performance above
@@ -72,10 +73,13 @@ Below code is changed with the comment at each snippet code that's different the
      phase = Math.sin( topSection + (i % 5));
      var style = 600 * phase + 'px';
     items[i].style.transform = "translateX(" + style; +"px)";
-  } ```
+  }
+``
+Now the loop was reduced from 200 to 35
 
- Now the loop was reduced from 200 to 35
-` for (var i = 0; i < 35; i++) {....} `
+``
+ for (var i = 0; i < 35; i++) {....}
+``
 
  Moved this at the end of the loop
 //moved this
