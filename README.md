@@ -53,10 +53,12 @@ the dx in the code was unnecessary and was slowing down the resize animation so
 }
 changePizzaSizes(size);
 ```
-Now the loop was reduced from 200 to 35
+Now the calculate number of pizzas dynamically
 
 ``` JavaScript
- for (var i = 0; i < 35; i++) {....}
+var height = window.innerHeight;
+var numberOfPizzas = height / s * cols
+ for (var i = 0; i < numberOfPizzas; i++) {....}
 ```
 Moved this at the end of the loop
 
@@ -81,10 +83,9 @@ Below code is changed with the comment at each snippet code that's different the
   var phase;
   var style;
 
-  //used translateX is it better at rendering
   for (var i = 0; i < itemLength ; i++) {
      phase = Math.sin( topSection + (i % 5));
      style = 600 * phase + 'px';
-    items[i].style.transform = "translateX(" + style; +"px)";
+
   }
 ```

@@ -460,7 +460,7 @@ var resizePizzas = function(size) {
 //
 //   changePizzaSizes(size);
 
-
+//here there is no query selecting on the for loop and no conversion math for pixels
 function changePizzaSizes(size) {
   switch(size) {
     case "1":
@@ -547,7 +547,9 @@ function updatePositions() {
   for (var i = 0; i < itemLength ; i++) {
      phase = Math.sin( topSection + (i % 5));
      style = 600 * phase + "px";
-    items[i].style.transform = "translateX(" + style; +"px)";
+    // items[i].style.transform = "translateX(" + style; +  "px)" ;
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+
 
   }
 
@@ -569,9 +571,11 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  var height = window.innerHeight;
+  var numberOfPizzas = height / s * cols
 
   // To improve scrolling the for loop limit was changed from 200 to 35
-  for (var i = 0; i < 35; i++) {
+  for (var i = 0; i < numberOfPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
