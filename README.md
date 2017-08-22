@@ -27,7 +27,8 @@ The specs are as follows
 
 the dx in the code was unnecessary and was slowing down the resize animation so
 
-```// Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
+`
+// Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
 function determineDx (elem, size) {
  var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
 //moved old width down to avoid
@@ -64,7 +65,7 @@ function changePizzaSizes(size) {
  }
 }
 
-changePizzaSizes(size); `
+changePizzaSizes(size);  `
 
 
 
@@ -100,7 +101,7 @@ changePizzaSizes(size); `
 
  Below code is changed with the comment at each snippet code that's different then the original repository
 
-`function updatePositions() {
+` function updatePositions() {
 
 //moved frame++ and window.performance above
   frame++;
@@ -116,13 +117,12 @@ changePizzaSizes(size); `
      phase = Math.sin( topSection + (i % 5));
      var style = 600 * phase + 'px';
     items[i].style.transform = "translateX(" + style; +"px)";
-
-  }``
+  } `
 
  Now the loop was reduced from 200 to 35
-` for (var i = 0; i < 35; i++) {....}`
+` for (var i = 0; i < 35; i++) {....} `
 
  Moved this at the end of the loop
 //moved this
-`` items = document.querySelectorAll('.mover');
-  updatePositions(); ``
+` items = document.querySelectorAll('.mover');
+  updatePositions(); `
