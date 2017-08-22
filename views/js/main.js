@@ -531,22 +531,21 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 
 function updatePositions() {
+
+  //moved above
   frame++;
   window.performance.mark("mark_start_frame");
-
+   // below line is moved down to avoid repainiting
   //  var items = document.querySelectorAll('.mover');
   //addedthis
   var topSection = (document.body.scrollTop / 1250);
   var itemLength = items.length;
-  itemsArray = [0,256,512,768,1024,1280,1536,1792];
+  //moved variable phase outside the loop so that a new variable is not made everytime the loop runs
+  var phase;
 
   for (var i = 0; i < itemLength ; i++) {
-    var phase = Math.sin( topSection + (i % 5));
-    var style = 600 * phase + 'px';
-    // items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-    // items[i].style.transform = 'matrix(0px,256px,512px,768px,1024px,1280px,1536px,1792px)' + 100 * phase + 'px';
-    // items[i].style.transform = 'translateX( "+ itemsArray[i] +" px )' + 100 * phase + 'px';
-    // items[i].style.left = itemsArray[i] + 100 * phase + 'px';
+     phase = Math.sin( topSection + (i % 5));
+     var style = 600 * phase + 'px';
     items[i].style.transform = "translateX(" + style; +"px)";
 
   }
@@ -569,8 +568,9 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  // To improve scrolling the for loop limit was changed from 200 to 100
-  for (var i = 0; i < 105; i++) {
+
+  // To improve scrolling the for loop limit was changed from 200 to 35
+  for (var i = 0; i < 35; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -578,9 +578,10 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s ;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
+
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
-
+//moved this
  items = document.querySelectorAll('.mover');
   updatePositions();
 
