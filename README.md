@@ -12,7 +12,7 @@ The specs are as follows
   * profilepic.jpg pizza.png width 100 and quality 20
   * 2048,cam-be-like, mobilewebdev are all of quality 10 and width 50
 
-* Gruntfile.js and package.json is added to the folder Grunt on {github}(https://github.com/trishh088/trishh088.github.io-website-optimise.git)
+* Gruntfile.js and package.json is added to the folder Grunt on [github](https://github.com/trishh088/trishh088.github.io-website-optimise.git)
 
 * style.css and print.css were inlined in index.html and the ,link> tags were commented
 * async was added to the google analytics and perfmatters.js script tag
@@ -74,14 +74,18 @@ Below code is changed with the comment at each snippet code that's different the
      var style = 600 * phase + 'px';
     items[i].style.transform = "translateX(" + style; +"px)";
   }
-``
-###### Now the loop was reduced from 200 to 35
-``` JavaScript
-for (var i = 0; i < 35; i++) {....} ```
-
-###### Moved this at the end of the loop
-//moved this
-``` JavaScript
- items = document.querySelectorAll('.mover');
-  updatePositions();
 ```
+```
+
+Now the loop was reduced from 200 to 35
+
+``
+    for (var i = 0; i < 35; i++) {....}
+``
+
+Moved this at the end of the loop
+//moved this
+``
+    items = document.querySelectorAll('.mover');
+    updatePositions();
+``
