@@ -1,4 +1,4 @@
-# Website Performance Optimization portfolio project 
+# Website Performance Optimization portfolio project
 For link to the website for review link [here](https://trishh088.github.io/trishh088.github.io-website-optimise/)
 For link to the code click [here](https://github.com/trishh088/trishh088.github.io-website-optimise.git)
 
@@ -22,6 +22,7 @@ The specs are as follows
 The specs are as follows
 1. Time to generate pizzas on load : **16ms**
 2. Time to resize pizzas : **1.05999ms**
+
 3.Avegrade scripting time to generate last 10 frames: **4.38ms**
 
 the dx in the code was unnecessary and was slowing down the resize animation so
@@ -63,14 +64,15 @@ function changePizzaSizes(size) {
  }
 }
 
-changePizzaSizes(size); ```
-
+changePizzaSizes(size); `
 
 
 
 was changed to
 
-``` function changePizzaSizes(size) {
+
+
+` function changePizzaSizes(size) {
   switch(size) {
     case "1":
     newwidth = 25;
@@ -93,12 +95,12 @@ was changed to
     randomPizzas[i].style.width = newwidth + "%";
   }
 }
-changePizzaSizes(size); ```
+changePizzaSizes(size); `
 
 
-*Below code is changed with the comment at each snippet code that's different then the original repository
+ Below code is changed with the comment at each snippet code that's different then the original repository
 
-``function updatePositions() {
+`function updatePositions() {
 
 //moved frame++ and window.performance above
   frame++;
@@ -115,13 +117,12 @@ changePizzaSizes(size); ```
      var style = 600 * phase + 'px';
     items[i].style.transform = "translateX(" + style; +"px)";
 
-  }
-``
+  }``
 
-***Now the loop was reduced from 200 to 35
-`` for (var i = 0; i < 35; i++) {....}``
+ Now the loop was reduced from 200 to 35
+` for (var i = 0; i < 35; i++) {....}`
 
-***Moved this at the end of the loop
+ Moved this at the end of the loop
 //moved this
 `` items = document.querySelectorAll('.mover');
   updatePositions(); ``
