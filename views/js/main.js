@@ -547,7 +547,7 @@ function updatePositions() {
     // items[i].style.transform = 'matrix(0px,256px,512px,768px,1024px,1280px,1536px,1792px)' + 100 * phase + 'px';
     // items[i].style.transform = 'translateX( "+ itemsArray[i] +" px )' + 100 * phase + 'px';
     // items[i].style.left = itemsArray[i] + 100 * phase + 'px';
-    items[i].style.transform = "translateX(" + style; +"10px)";
+    items[i].style.transform = "translateX(" + style; +"px)";
 
   }
 
