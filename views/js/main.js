@@ -495,7 +495,7 @@ changePizzaSizes(size);
   console.log("Time to resize pizzas: " + timeToResize[timeToResize.length-1].duration + "ms");
 
 
-}
+};
 
 
 window.performance.mark("mark_start_generating"); // collect timing data
@@ -540,12 +540,13 @@ function updatePositions() {
   //addedthis
   var topSection = (document.body.scrollTop / 1250);
   var itemLength = items.length;
-  //moved variable phase outside the loop so that a new variable is not made everytime the loop runs
+  //moved variable phase and style outside the loop so that a new variable is not made everytime the loop runs
   var phase;
+  var style;
 
   for (var i = 0; i < itemLength ; i++) {
      phase = Math.sin( topSection + (i % 5));
-     var style = 600 * phase + 'px';
+     style = 600 * phase + "px";
     items[i].style.transform = "translateX(" + style; +"px)";
 
   }

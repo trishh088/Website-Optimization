@@ -20,7 +20,7 @@ The specs are as follows
 
 ## Part 2: Optimizing  pizza.html and main.js
 The specs are as follows
-1. Time to generate pizzas on load : **16ms**
+1. Time to generate pizzas on load : **14ms**
 2. Time to resize pizzas : **1.05999ms**
 
 3.Avegrade scripting time to generate last 10 frames: **4.38ms**
@@ -77,13 +77,14 @@ Below code is changed with the comment at each snippet code that's different the
   //addedthis
   var topSection = (document.body.scrollTop / 1250);
   var itemLength = items.length;
-  //moved variable phase outside the loop so that a new variable is not made everytime the loop runs
+  //moved variable phase and style outside the loop so that a new variable is not made everytime the loop runs
   var phase;
+  var style;
 
   //used translateX is it better at rendering
   for (var i = 0; i < itemLength ; i++) {
      phase = Math.sin( topSection + (i % 5));
-     var style = 600 * phase + 'px';
+     style = 600 * phase + 'px';
     items[i].style.transform = "translateX(" + style; +"px)";
   }
 ```
