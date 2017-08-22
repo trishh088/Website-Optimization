@@ -27,53 +27,7 @@ The specs are as follows
 
 the dx in the code was unnecessary and was slowing down the resize animation so
 
-`
-// Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-function determineDx (elem, size) {
- var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-//moved old width down to avoid
- var oldWidth = elem.offsetWidth;
- var oldSize = oldWidth / windowWidth;
-
- // Changes the slider value to a percent width
- function sizeSwitcher (size) {
-   switch(size) {
-     case "1":
-       return 0.25;
-     case "2":
-       return 0.3333;
-     case "3":
-       return 0.5;
-     default:
-       console.log("bug in sizeSwitcher");
-   }
- }
-
- var newSize = sizeSwitcher(size);
- var dx = (newSize - oldSize) * windowWidth;
-
- return dx;
-}
-
-// Iterates through pizza elements on the page and changes their widths
-function changePizzaSizes(size) {
- var randomPizza = document.querySelectorAll(".randomPizzaContainer");
- for (var i = 0; i < randomPizza.length; i++) {
-   var dx = determineDx(randomPizza[i], size);
-   var newwidth = (randomPizza[i].offsetWidth + dx) + 'px';
-   randomPizza[i].style.width = newwidth;
- }
-}
-
-changePizzaSizes(size);  `
-
-
-
-was changed to
-
-
-
-` function changePizzaSizes(size) {
+' function changePizzaSizes(size) {
   switch(size) {
     case "1":
     newwidth = 25;
@@ -96,10 +50,9 @@ was changed to
     randomPizzas[i].style.width = newwidth + "%";
   }
 }
-changePizzaSizes(size); `
+changePizzaSizes(size); '
 
-
- Below code is changed with the comment at each snippet code that's different then the original repository
+Below code is changed with the comment at each snippet code that's different then the original repository
 
 ` function updatePositions() {
 
