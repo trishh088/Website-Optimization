@@ -75,7 +75,8 @@ Below code is changed with the comment at each snippet code that's different the
     items[i].style.transform = "translateX(" + style; +"px)";
   }
 ```
-```
+`````
+
 
 Now the loop was reduced from 200 to 35
 
