@@ -75,13 +75,13 @@ Below code is changed with the comment at each snippet code that's different the
     items[i].style.transform = "translateX(" + style; +"px)";
   }
 ``
-Now the loop was reduced from 200 to 35
+###### Now the loop was reduced from 200 to 35
+``` JavaScript
+for (var i = 0; i < 35; i++) {....} ```
 
-``
- for (var i = 0; i < 35; i++) {....}
-``
-
- Moved this at the end of the loop
+###### Moved this at the end of the loop
 //moved this
-` items = document.querySelectorAll('.mover');
-  updatePositions(); `
+``` JavaScript
+ items = document.querySelectorAll('.mover');
+  updatePositions();
+```
