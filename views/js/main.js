@@ -572,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var height = window.innerHeight;
-  var numberOfPizzas = height / s * cols
+  var numberOfPizzas = height / s * cols;
 
   // To improve scrolling the for loop limit was changed from 200 to 35
   for (var i = 0; i < numberOfPizzas; i++) {
